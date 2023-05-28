@@ -1,36 +1,15 @@
 <!DOCTYPE html>
 <%- include('include/head'); %>
-	<html lang="en">
+<html lang="en">
+  <body>
+    <div style="text-align: center">
+      <h1>Application is up and running 🚀</h1>
+    </div>
 
-	<body>
-		<h1>
-			<%= title %>
-		</h1>
-		<p>Welcome to <%= title %>
-		</p>
-		<br />
-		<p>Other Pages:</p>
-		<a href="/pageTwo">Page Two</a>
-		<br />
-		<a href="/pageThree">Page Three</a>
-		<br />
-		<a href="/pageFour">Page Four</a>
-		<script type="text/javascript">
-
-			window.addEventListener('load', function () {
-				// fetch /data from server
-				fetch("/data")
-					.then(function (response) {
-						return response.json();
-					})
-					.then(function (data) {
-						console.log(data);
-					})
-					.catch(function (err) {
-						console.log(err);
-					});
-			});
-		</script>
-	</body>
-
-	</html>
+    <script type="text/javascript">
+      function ready() {
+        window.location.replace('/password');
+      }
+    </script>
+  </body>
+</html>
