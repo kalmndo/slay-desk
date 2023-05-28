@@ -8,7 +8,7 @@ const loading = document.getElementById('loading');
 
   // @ts-expect-error
   ipcRenderer.on('server-running', (_event, _data) => {
-    expressApp!.setAttribute('src', `${expressAppURL}?anjing=babi`);
+    expressApp!.setAttribute('src', `${expressAppURL}`);
     loading!.style.display = 'none';
     expressApp!.style.display = 'block';
   });

@@ -28,37 +28,33 @@ const routes = [
   {
     path: '/',
     handler: async (req: any, res: any) => {
-      if (req.query.anjing === 'babi') {
-        const smt = db.prepare('select * from Password where id=1');
-        const value: any = smt.all();
+      const smt = db.prepare('select * from Password where id=1');
+      const value: any = smt.all();
 
-        if (value.length === 0) {
-          res.redirect('/password');
-        } else {
-          if (req.query.event_type === 'payment_success') {
-            const uri = `${url}${COMMAND.EXIT_LOCKSCREEN}${value[0].password}`;
-            await axios.get(uri);
-
-            await keyboard.pressKey(Key.LeftControl, Key.LeftWin);
-            await keyboard.pressKey(Key.Right);
-            await keyboard.releaseKey(Key.LeftControl, Key.LeftWin);
-            await keyboard.releaseKey(Key.Right);
-            res.send('Good');
-          } else if (req.query.event_type === 'session_end') {
-            const uri = `${url}${COMMAND.SHOW_LOCKSCREEN}${value[0].password}`;
-            await axios.get(uri);
-
-            await keyboard.pressKey(Key.LeftControl, Key.LeftWin);
-            await keyboard.pressKey(Key.Left);
-            await keyboard.releaseKey(Key.LeftControl, Key.LeftWin);
-            await keyboard.releaseKey(Key.Left);
-            res.send('Good');
-          } else {
-            res.render('index', { title: 'Home' });
-          }
-        }
+      if (value.length === 0) {
+        res.redirect('/password');
       } else {
-        res.send('GUOBLOG');
+        if (req.query.event_type === 'payment_success') {
+          const uri = `${url}${COMMAND.EXIT_LOCKSCREEN}${value[0].password}`;
+          await axios.get(uri);
+
+          await keyboard.pressKey(Key.LeftControl, Key.LeftWin);
+          await keyboard.pressKey(Key.Right);
+          await keyboard.releaseKey(Key.LeftControl, Key.LeftWin);
+          await keyboard.releaseKey(Key.Right);
+          res.send('Good');
+        } else if (req.query.event_type === 'session_end') {
+          const uri = `${url}${COMMAND.SHOW_LOCKSCREEN}${value[0].password}`;
+          await axios.get(uri);
+
+          await keyboard.pressKey(Key.LeftControl, Key.LeftWin);
+          await keyboard.pressKey(Key.Left);
+          await keyboard.releaseKey(Key.LeftControl, Key.LeftWin);
+          await keyboard.releaseKey(Key.Left);
+          res.send('Good');
+        } else {
+          res.render('index', { title: 'Home' });
+        }
       }
     },
   },
